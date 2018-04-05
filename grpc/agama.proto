@@ -1,0 +1,46 @@
+syntax="proto3";
+
+import "google/protobuf/empty.proto";
+
+package grpc;
+
+message AddAgamaReq{
+    string IDAgama=1;
+    string NamaAgama=2;
+    int32 Status=3;
+    string Keterangan=4;
+    string CreateBy=5;    
+} 
+
+message ReadAgamaByKeteranganReq{
+    string Keterangan=1;
+}
+
+message ReadAgamaByKeteranganResp{
+    
+    string IDAgama=1;
+    string NamaAgama=2;
+    int32 Status=3;
+    string Keterangan=4;
+    string CreateBy=5;
+} 
+
+
+message ReadAgamaResp{
+    repeated ReadAgamaByKeteranganResp allAgama=1;
+}
+
+message UpdateAgamaReq{
+    string IDAgama=1;
+    string NamaAgama=2;
+    int32 Status=3;
+    string Keterangan=4;
+    string UpdateBy=5;
+}
+
+service AgamaService{
+    rpc AddAgama(AddAgamaReq) returns (google.protobuf.Empty) {};
+    rpc ReadAgamaByKeterangan(ReadAgamaByKeteranganReq) returns (ReadAgamaByKeteranganResp) {};
+    rpc ReadAgama(google.protobuf.Empty) returns (ReadAgamaResp){};
+    rpc UpdateAgama(UpdateAgamaReq) returns (google.protobuf.Empty){};
+    }
